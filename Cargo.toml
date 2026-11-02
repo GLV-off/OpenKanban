@@ -1,9 +1,10 @@
-[package]
-name = "open_kanban"
-version = "0.1.0"
-
 [workspace]
-resolver = "2"
+resolver = "3"
 members = [
   "backend/open_kanban_service"
 ]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2024"
+publish = false

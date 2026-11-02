@@ -1,1 +1,14 @@
 /target
+**/target
+node_modules/
+dist/
+coverage/
+.env
+.env.*
+!.env.example
+*.db
+*.db-wal
+*.db-shm
+out/
+.DS_Store
+Thumbs.db
