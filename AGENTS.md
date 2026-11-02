@@ -44,14 +44,19 @@ cargo fmt --check                    # форматирование
 cargo clippy --all-targets -- -D warnings
 ```
 
-Фронтенд (из `frontend/open_kanban_web`, появится в итерации 0):
+Сервис читает `.env` (через `dotenvy`), переменные процесса приоритетнее.
+Локальные проверки после запуска: `/healthz`, `/readyz`,
+`/api/v1/openapi.json`, Swagger UI — `/api/v1/docs` (кроме production).
+
+Фронтенд (из `frontend/open_kanban_web`):
 
 ```bash
 npm ci
-npm run dev
-npm run build
-npm run test        # vitest run
-npx biome ci .
+npm run dev          # Vite на :5173, проксирует /healthz и /api на :8080
+npm run build        # typecheck + production build
+npm run typecheck
+npm run test         # vitest run
+npm run lint         # biome check .
 ```
 
 Конфигурация сервиса — только через переменные окружения; значения по
@@ -69,6 +74,9 @@ npx biome ci .
 - Все изменения данных о задачах — в транзакции; инварианты из
   [doc/domain_ru.md](doc/domain_ru.md) обязательны к соблюдению.
 - Права проверяются на каждом эндпоинте; на каждый запрет — негативный тест.
+- Аутентификация: access — короткоживущий JWT в заголовке Bearer; refresh —
+  только в `HttpOnly`-cookie, хранится хешем, ротируется; токены, пароли и
+  хеши не логируются и не возвращаются API.
 - API-контракт: `/api/v1`, JSON, id строками, время RFC 3339 UTC, ошибки
   `application/problem+json`.
 - Пароли — только argon2id; refresh-токены — только хешем; секреты и PII не

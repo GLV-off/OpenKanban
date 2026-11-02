@@ -1,0 +1,148 @@
+:root {
+  color-scheme: light;
+  --bg: #f4f6f8;
+  --surface: #ffffff;
+  --text: #1d2530;
+  --muted: #5b6675;
+  --border: #dfe4ea;
+  --accent: #2f6fed;
+  --good-bg: #e6f6ec;
+  --good-text: #1c7a43;
+  --bad-bg: #fdecec;
+  --bad-text: #b42318;
+  --idle-bg: #eef1f5;
+  --idle-text: #5b6675;
+
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px 24px;
+  background: #16202e;
+  color: #ffffff;
+}
+
+.brand {
+  font-weight: 650;
+  letter-spacing: 0.2px;
+}
+
+.app-nav {
+  display: flex;
+  gap: 16px;
+}
+
+.app-nav a {
+  color: #c9d6e8;
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.app-nav a:hover {
+  color: #ffffff;
+}
+
+.app-main {
+  flex: 1;
+  width: 100%;
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 32px 24px;
+}
+
+.card {
+  padding: 24px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: 0 1px 2px rgb(16 24 40 / 4%);
+}
+
+.card h1 {
+  margin: 0 0 8px;
+  font-size: 22px;
+}
+
+.muted {
+  margin: 0 0 20px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.status-list {
+  display: grid;
+  gap: 12px;
+  margin: 0 0 20px;
+}
+
+.status-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px dashed var(--border);
+}
+
+.status-row dt {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.status-row dd {
+  margin: 0;
+}
+
+.pill {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.pill-good {
+  background: var(--good-bg);
+  color: var(--good-text);
+}
+
+.pill-bad {
+  background: var(--bad-bg);
+  color: var(--bad-text);
+}
+
+.pill-idle {
+  background: var(--idle-bg);
+  color: var(--idle-text);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  font-size: 14px;
+}
+
+.actions a {
+  color: var(--accent);
+}

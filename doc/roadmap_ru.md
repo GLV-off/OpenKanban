@@ -25,22 +25,29 @@
 **Цель:** репозиторий собирается, запускается и проверяется одной командой;
 документация и правила согласованы.
 
-Задачи:
+Статус: итерация 0 завершена — бекенд и фронтенд-каркас собираются, тесты и
+CI зелёные; следующий шаг — S1 (аутентификация).
 
-1. Починить workspace-манифест (виртуальный манифест, общие поля пакетов).
-2. `AGENTS.md`: правила проекта, команды сборки/тестов, карта документации.
-3. README: что это, быстрый старт, ссылки на `doc/`.
-4. Бекенд: конфигурация из env, `tracing`, `/healthz`, `/readyz`, каркас
-   ошибок (`problem+json`), пул SQLite с обязательными PRAGMA, механизм
-   миграций.
-5. Первая миграция: только `users` + `sessions` (минимум, проверяющий схему).
-6. Бекенд: `cargo fmt`, `clippy -D warnings`, тест-заготовка для `/healthz`.
-7. Фронтенд: Vite + React + TypeScript, строгий `tsconfig`, роутер, пустая
-   страница `Health` и страница логина-заглушки, Biome.
-8. `tools/`: команда генерации типов из OpenAPI (пока на заглушке),
-   smoke-скрипт «сервис отвечает 200 на `/healthz`».
-9. CI: формат, линт, тесты бекенда и фронтенда, сборка.
-10. `.gitignore` для артефактов Rust/Node/SQLite.
+- [x] 0.1 Workspace-манифест (виртуальный, общие поля пакетов, resolver 3).
+- [x] 0.2 `AGENTS.md`: правила проекта, команды, карта документации.
+- [x] 0.3 Бекенд-скелет: `OK_BIND`/`OK_DATABASE_URL`/`OK_LOG`/`OK_ENV` (+ `.env`
+  через `dotenvy`), `tracing`, `/healthz`, `/readyz`, `problem+json`,
+  request-id, перехват паник, graceful shutdown.
+- [x] 0.4 SQLite: WAL, `foreign_keys`, `busy_timeout`, `sqlx::migrate!`,
+  миграция `0001_users_sessions`.
+- [x] 0.5 OpenAPI: `/api/v1/openapi.json`, Swagger UI `/api/v1/docs` (только
+  вне production).
+- [x] 0.6 Тесты бекенда: health/readyz, 404/405, OpenAPI, миграции, PRAGMA,
+  FK; `fmt`/`clippy` зелёные.
+- [x] 0.7 `.gitignore` для Rust/Node/SQLite/env.
+- [x] 0.8 Фронтенд: Vite 8 + React 19 + TypeScript 5.9 (строгий `tsconfig`),
+  react-router, TanStack Query, Biome, vitest; страница Health и заглушка
+  логина, dev-прокси на API.
+- [x] 0.9 `tools/`: `gen-api.sh` (OpenAPI → типы), `smoke.sh` (проверка
+  `/healthz`, `/readyz`, `/api/v1/openapi.json`).
+- [x] 0.10 CI (GitHub Actions): fmt, clippy, тесты бекенда; lint, typecheck,
+  тесты и сборка фронтенда.
+- [x] 0.11 README: быстрый старт бекенда и фронтенда, таблица env-переменных.
 
 Definition of Done:
 
@@ -56,6 +63,10 @@ Definition of Done:
 **Цель:** сквозной сценарий из [goals_ru.md](goals_ru.md#8-критерии-приёмки-итерации-1).
 
 Порядок срезов (каждый срез — работающий вертикальный слой):
+
+Статус на 2026-11-02: у S1 готова бекенд-часть (эндпоинты, JWT + refresh
+с ротацией и отзывом цепочки, троттлинг, 12 интеграционных тестов);
+фронтенд-часть S1 — следующий шаг.
 
 | Срез | Бекенд | Фронтенд | Проверка |
 |---|---|---|---|
